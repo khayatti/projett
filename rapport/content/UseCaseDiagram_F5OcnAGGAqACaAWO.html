@@ -1,0 +1,374 @@
+<html>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="report.css" type="text/css"/>
+	<title>Use Case Diagram - Gestion_livre_case</title>
+	<META name="Description" content="ce diagramme présente les cas d'utilisations d'une bibliothecaire concernant la gestion un bibliothéque"/>
+	<script type="text/javascript" src="report.js"></script>
+	<script type="text/javascript" src="link_popup.js"></script>
+	<script type="text/javascript" src="tooltip.js"></script>
+</head>
+<body style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" onload="initPage();initDiagram();initGridDiagram();">
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_top">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_bottom">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_left">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_right">
+	</div>
+	<canvas width="100" style="position:absolute; z-index:2; visibility:hidden" id="spotlight_c" height="100">
+	</canvas>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesTop">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesRight">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+			</tr>
+			<tr>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute;z-index:4;visibility:hidden" id="linkPopupMenuLayer">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="linkPopupMenuTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="referenceIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Ref.gif" style="border:none" onclick="movePopupPositionToReferenceIconPosition();resetPopupForReference();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="subdiagramIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Subdiagram.gif" style="border:none" onclick="movePopupPositionToSubdiagramIconPosition();resetPopupForSubdiagram();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="transitorIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Transitor.gif" style="border:none" onclick="movePopupPositionToTransitorIconPosition();resetPopupForTransitor();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="documentationIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Documentation.png" style="border:none" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="HeaderText">
+		Gestion_livre	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="HeaderLine1">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine2">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine3">
+			</td>
+		</tr>
+	</table>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="referencedBys">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="referencedBysTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="vplink">
+		<table border="1" cellpadding="0" cellspacing="0" bordercolor="#A9BFD3">
+			<tr>
+				<td>
+					<table border="0" cellpadding="0" width="100%" cellspacing="0">
+						<tr style="background:#DDDDDD">
+							<td style="font-size: 12px;" align="left">
+								<select onchange="vpLinkToggleName()" id="vplink-linkType">
+	<option value="Project Link">Project Link</option>
+	<option value="Page URL">Page URL</option>
+</select>
+							</td>
+							<td style="font-size: 12px;" align="right">
+								<input onclick="javascript: vpLinkToggleName()" id="vplink-checkbox" type="checkbox" />
+								<label for="vplink-checkbox">with Name</label>							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="vplink-text" style="width: 348px; height: 60px; border-color: #7EADD9; outline: none;"></textarea>				</td>
+			</tr>
+		</table>
+	</div>
+	<p class="PageTitle">
+		<span id="PageTitleText">
+			Use Case Diagram - Gestion_livre_case		</span>
+<a onclick="javascript: showVpLink('projet.vpp://diagram/F5OcnAGGAqACaAWO', 'Gestion_livre_case\nprojet.vpp://diagram/F5OcnAGGAqACaAWO', 'Gestion_livre_case', this); return false;" style="padding-left: 16px; font-size: 12px" href="#"><img src="../images/icons/link.png" border="0"> link</a>	</p>
+	<div style="position: relative; padding-bottom: 20px;">
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: absolute; top: 0; left: 0; z-index: 20;" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),hideLinkPopup(),hideReferencedBys();">
+			<tr>
+				<td>
+<span class="TableContent">Jump to:</span>					<select id="SelectShape" class="TableContent" onChange="scrollWin('diagram', this.value);hideLinkPopup();showSpotLight('diagram', this.value)">
+<option value="">Please select a model element</option>
+<option value="shape|197.0|2.0|222.0|287.0|System_VOyynAGGAqACaAcT.html|System_VOyynAGGAqACaAcT.html|5OyynAGGAqACaAcS" id="option5OyynAGGAqACaAcS">Bibliothéque_case : System</option>
+<option value="shape|14.0|101.0|61.0|81.0|Actor__CxcnAGGAqACaAWd.html|Actor__CxcnAGGAqACaAWd.html|OCxcnAGGAqACaAWc" id="optionOCxcnAGGAqACaAWc">bibliothécaire : Actor</option>
+<option value="shape|242.0|38.0|145.0|56.0|UseCase_Hj1cnAGGAqACaAW_.html|UseCase_Hj1cnAGGAqACaAW_.html|Hj1cnAGGAqACaAW9" id="optionHj1cnAGGAqACaAW9">Ajouter un livre : Use Case</option>
+<option value="shape|242.0|117.0|145.0|57.0|UseCase_6BNcnAGGAqACaAXN.html|UseCase_6BNcnAGGAqACaAXN.html|6BNcnAGGAqACaAXM" id="option6BNcnAGGAqACaAXM">Recherche de livres : Use Case</option>
+<option value="shape|242.0|207.0|145.0|55.0|UseCase_SitcnAGGAqACaAXe.html|UseCase_SitcnAGGAqACaAXe.html|SitcnAGGAqACaAXd" id="optionSitcnAGGAqACaAXd">Generer rapport : Use Case</option>
+</select>				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: relative; top: 24;">
+			<tr>
+				<td>
+					<img id="diagram" src="../images/Gestion_livre_case.png" usemap="#diagram_map" class="Image" width="423" height="293"/>
+					<map name="diagram_map">
+<area imageId="diagram" coords="242.0, 85.89952, 75.0, 133.8421, 75.0, 148.98077, 265.6, 94.0, 242.0, 94.0, 242.0, 85.89952" coords2="242.0, 85.89952, 75.0, 133.8421, 75.0, 148.98077, 265.6, 94.0, 242.0, 94.0, 242.0, 85.89952" shape="poly" alt=":Association" id="areadiagram_map_o16SnAGGAqACaAaN_default" href="Association_sV6SnAGGAqACaAaI.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="75.0, 135.0, 75.0, 149.0, 242.0, 149.0, 242.0, 135.0" coords2="75.0, 135.0, 75.0, 149.0, 242.0, 149.0, 242.0, 135.0" shape="poly" alt=":Association" id="areadiagram_map_DxGSnAGGAqACaAaV_default" href="Association_rRGSnAGGAqACaAaQ.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="75.0, 134.66342, 75.0, 150.16505, 75.0, 150.16505, 242.0, 213.39806, 242.0, 207.0, 265.1154, 207.0, 75.0, 134.66342" coords2="75.0, 134.66342, 75.0, 150.16505, 75.0, 150.16505, 242.0, 213.39806, 242.0, 207.0, 265.1154, 207.0, 75.0, 134.66342" shape="poly" alt=":Association" id="areadiagram_map_OCWSnAGGAqACaAad_default" href="Association_x8WSnAGGAqACaAaY.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;color:#000000;margin-left:0;font-weight:normal;font-size:12px;font-family:Dialog;margin-right:0;&amp;quot;&amp;gt;
+    &amp;lt;div class=&amp;quot;p-title &amp;quot; display=&amp;quot;flex&amp;quot; font-style=&amp;quot;normal&amp;quot; letter-spacing=&amp;quot;normal&amp;quot; style=&amp;quot;background-color:rgb(236, 236, 236);color:rgb(20, 20, 20);margin-bottom:-5px;font-weight:400;font-size:15px;font-family:Segoe UI, Helvetica Neue, Helvetica, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, sans-serif;text-align:start;&amp;quot; text-indent=&amp;quot;0px&amp;quot; text-transform=&amp;quot;none&amp;quot; white-space=&amp;quot;normal&amp;quot; word-spacing=&amp;quot;0px&amp;quot;&amp;gt;
+      &amp;lt;p style=&amp;quot;margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;&amp;quot;&amp;gt;
+        Biblioth&amp;#233;caire ajouter un nouveau livre &amp;#224; la collection
+      &amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;br class=&amp;quot;Apple-interchange-newline&amp;quot;&amp;gt;
+    
+
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;&amp;quot;&amp;gt;
+      &amp;nbsp;
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="242, 38, 387, 94" coords2="242, 38, 387, 94" shape="rect" alt="Ajouter un livre:Use Case" id="areadiagram_map_Hj1cnAGGAqACaAW9_default" href="UseCase_Hj1cnAGGAqACaAW_.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;color:#000000;margin-left:0;font-weight:normal;font-size:12px;font-family:Dialog;margin-right:0;&amp;quot;&amp;gt;
+    &amp;lt;div class=&amp;quot;p-title &amp;quot; display=&amp;quot;flex&amp;quot; font-style=&amp;quot;normal&amp;quot; letter-spacing=&amp;quot;normal&amp;quot; style=&amp;quot;background-color:rgb(236, 236, 236);color:rgb(20, 20, 20);margin-bottom:-5px;font-weight:400;font-size:15px;font-family:Segoe UI, Helvetica Neue, Helvetica, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, sans-serif;text-align:start;&amp;quot; text-indent=&amp;quot;0px&amp;quot; text-transform=&amp;quot;none&amp;quot; white-space=&amp;quot;normal&amp;quot; word-spacing=&amp;quot;0px&amp;quot;&amp;gt;
+      &amp;lt;p style=&amp;quot;margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;&amp;quot;&amp;gt;
+        Biblioth&amp;#233;caire recherche sur un livre , est-ce-qu'il est dans la 
+        colleclection
+      &amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="242, 117, 387, 174" coords2="242, 117, 387, 174" shape="rect" alt="Recherche de livres:Use Case" id="areadiagram_map_6BNcnAGGAqACaAXM_default" href="UseCase_6BNcnAGGAqACaAXN.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;color:#000000;margin-left:0;font-weight:normal;font-size:12px;font-family:Dialog;margin-right:0;&amp;quot;&amp;gt;
+    &amp;lt;div class=&amp;quot;p-title &amp;quot; display=&amp;quot;flex&amp;quot; font-style=&amp;quot;normal&amp;quot; letter-spacing=&amp;quot;normal&amp;quot; style=&amp;quot;background-color:rgb(236, 236, 236);color:rgb(20, 20, 20);margin-bottom:-5px;font-weight:400;font-size:15px;font-family:Segoe UI, Helvetica Neue, Helvetica, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, sans-serif;text-align:start;&amp;quot; text-indent=&amp;quot;0px&amp;quot; text-transform=&amp;quot;none&amp;quot; white-space=&amp;quot;normal&amp;quot; word-spacing=&amp;quot;0px&amp;quot;&amp;gt;
+      &amp;lt;p style=&amp;quot;margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;&amp;quot;&amp;gt;
+        Biblioth&amp;#233;caire g&amp;#233;n&amp;#233;rer un rapport qui pr&amp;#233;sente les livres enregistr&amp;#233;s 
+        dans la collection
+      &amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="242, 207, 387, 262" coords2="242, 207, 387, 262" shape="rect" alt="Generer rapport:Use Case" id="areadiagram_map_SitcnAGGAqACaAXd_default" href="UseCase_SitcnAGGAqACaAXe.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="197, 2, 419, 289" coords2="197, 2, 419, 289" shape="rect" alt="Bibliothéque_case:System" id="areadiagram_map_5OyynAGGAqACaAcS_default" href="System_VOyynAGGAqACaAcT.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="14, 101, 75, 182" coords2="14, 101, 75, 182" shape="rect" alt="bibliothécaire:Actor" id="areadiagram_map_OCxcnAGGAqACaAWc_default" href="Actor__CxcnAGGAqACaAWd.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+</map>
+				</td>
+			</tr>
+		</table>
+		<p>
+		</p>
+	</div>
+	<p>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0">
+			<tr>
+				<td>
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="color:#000000;margin-left:0;font-weight:normal;font-size:12px;font-family:Dialog;margin-right:0;">
+    <p style="margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;">
+      ce diagramme pr&#233;sente les cas d'utilisations d'une bibliothecaire 
+      concernant la gestion un biblioth&#233;que
+    </p>
+  </body></span>				</td>
+			</tr>
+		</table>
+	</p>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="Category">
+				Model Elements			</td>
+		</tr>
+		<tr>
+			<td style="height: 5px">
+			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td colSpan="4" class="TableHeaderLine">
+			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine1">
+			</td>
+		</tr>
+		<tr class="TableHeader">
+			<td class="TableCellSpaceHolder10Px">
+			</td>
+			<td width="30%">
+<span class="TableHeaderText">Name</span>			</td>
+			<td class="TableCellSpaceHolder20Px">
+			</td>
+			<td>
+<span class="TableHeaderText">Description</span>			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine2">
+			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/System.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/System.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="System_VOyynAGGAqACaAcT.html" class="ItemLink">Bibliothéque_case : System</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Actor.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Actor.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Actor__CxcnAGGAqACaAWd.html" class="ItemLink">bibliothécaire : Actor</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_Hj1cnAGGAqACaAW_.html" class="ItemLink">Ajouter un livre : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="color:#000000;margin-left:0;font-weight:normal;font-size:12px;font-family:Dialog;margin-right:0;">
+    <div class="p-title " display="flex" font-style="normal" letter-spacing="normal" style="background-color:rgb(236, 236, 236);color:rgb(20, 20, 20);margin-bottom:-5px;font-weight:400;font-size:15px;font-family:Segoe UI, Helvetica Neue, Helvetica, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, sans-serif;text-align:start;" text-indent="0px" text-transform="none" white-space="normal" word-spacing="0px">
+      <p style="margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;">
+        Biblioth&#233;caire ajouter un nouveau livre &#224; la collection
+      </p>
+    </div>
+    <br class="Apple-interchange-newline">
+    
+
+    <p style="margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;">
+      &nbsp;
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_6BNcnAGGAqACaAXN.html" class="ItemLink">Recherche de livres : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="color:#000000;margin-left:0;font-weight:normal;font-size:12px;font-family:Dialog;margin-right:0;">
+    <div class="p-title " display="flex" font-style="normal" letter-spacing="normal" style="background-color:rgb(236, 236, 236);color:rgb(20, 20, 20);margin-bottom:-5px;font-weight:400;font-size:15px;font-family:Segoe UI, Helvetica Neue, Helvetica, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, sans-serif;text-align:start;" text-indent="0px" text-transform="none" white-space="normal" word-spacing="0px">
+      <p style="margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;">
+        Biblioth&#233;caire recherche sur un livre , est-ce-qu'il est dans la 
+        colleclection
+      </p>
+    </div>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_SitcnAGGAqACaAXe.html" class="ItemLink">Generer rapport : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="color:#000000;margin-left:0;font-weight:normal;font-size:12px;font-family:Dialog;margin-right:0;">
+    <div class="p-title " display="flex" font-style="normal" letter-spacing="normal" style="background-color:rgb(236, 236, 236);color:rgb(20, 20, 20);margin-bottom:-5px;font-weight:400;font-size:15px;font-family:Segoe UI, Helvetica Neue, Helvetica, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, sans-serif;text-align:start;" text-indent="0px" text-transform="none" white-space="normal" word-spacing="0px">
+      <p style="margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;">
+        Biblioth&#233;caire g&#233;n&#233;rer un rapport qui pr&#233;sente les livres enregistr&#233;s 
+        dans la collection
+      </p>
+    </div>
+  </body></span>			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="TableCellSpaceHolder1PxTall">
+			</td>
+		</tr>
+		<tr>
+			<td class="TableFooter">
+			</td>
+		</tr>
+	</table>
+	<div style="height: 20px">
+	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="FooterLine">
+			</td>
+		</tr>
+	</table>
+	<div class="HeaderText">
+		Gestion_livre	</div>
+</body>
+</html>

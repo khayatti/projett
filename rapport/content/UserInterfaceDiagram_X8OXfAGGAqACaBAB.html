@@ -1,0 +1,463 @@
+<html>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="report.css" type="text/css"/>
+	<title>User Interface - IHM1</title>
+	<META name="Description" content="ce interface presente la fome extérieure de l'application et caractérisé par l'ajoute d'un neauvou livre et recheche sur un livre qui deja existe dans la collection ainsi que permet de passage à l'interface des livres enregistrés (IHM2)"/>
+	<script type="text/javascript" src="report.js"></script>
+	<script type="text/javascript" src="link_popup.js"></script>
+	<script type="text/javascript" src="tooltip.js"></script>
+</head>
+<body style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" onload="initPage();initDiagram();initGridDiagram();">
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_top">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_bottom">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_left">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_right">
+	</div>
+	<canvas width="100" style="position:absolute; z-index:2; visibility:hidden" id="spotlight_c" height="100">
+	</canvas>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesTop">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesRight">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+			</tr>
+			<tr>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute;z-index:4;visibility:hidden" id="linkPopupMenuLayer">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="linkPopupMenuTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="referenceIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Ref.gif" style="border:none" onclick="movePopupPositionToReferenceIconPosition();resetPopupForReference();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="subdiagramIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Subdiagram.gif" style="border:none" onclick="movePopupPositionToSubdiagramIconPosition();resetPopupForSubdiagram();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="transitorIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Transitor.gif" style="border:none" onclick="movePopupPositionToTransitorIconPosition();resetPopupForTransitor();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="documentationIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Documentation.png" style="border:none" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="HeaderText">
+		Gestion_livre	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="HeaderLine1">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine2">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine3">
+			</td>
+		</tr>
+	</table>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="referencedBys">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="referencedBysTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="vplink">
+		<table border="1" cellpadding="0" cellspacing="0" bordercolor="#A9BFD3">
+			<tr>
+				<td>
+					<table border="0" cellpadding="0" width="100%" cellspacing="0">
+						<tr style="background:#DDDDDD">
+							<td style="font-size: 12px;" align="left">
+								<select onchange="vpLinkToggleName()" id="vplink-linkType">
+	<option value="Project Link">Project Link</option>
+	<option value="Page URL">Page URL</option>
+</select>
+							</td>
+							<td style="font-size: 12px;" align="right">
+								<input onclick="javascript: vpLinkToggleName()" id="vplink-checkbox" type="checkbox" />
+								<label for="vplink-checkbox">with Name</label>							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="vplink-text" style="width: 348px; height: 60px; border-color: #7EADD9; outline: none;"></textarea>				</td>
+			</tr>
+		</table>
+	</div>
+	<p class="PageTitle">
+		<span id="PageTitleText">
+			User Interface - IHM1		</span>
+<a onclick="javascript: showVpLink('projet.vpp://diagram/X8OXfAGGAqACaBAB', 'IHM1\nprojet.vpp://diagram/X8OXfAGGAqACaBAB', 'IHM1', this); return false;" style="padding-left: 16px; font-size: 12px" href="#"><img src="../images/icons/link.png" border="0"> link</a>	</p>
+	<div style="position: relative; padding-bottom: 20px;">
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: absolute; top: 0; left: 0; z-index: 20;" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),hideLinkPopup(),hideReferencedBys();">
+			<tr>
+				<td>
+<span class="TableContent">Jump to:</span>					<select id="SelectShape" class="TableContent" onChange="scrollWin('diagram', this.value);hideLinkPopup();showSpotLight('diagram', this.value)">
+<option value="">Please select a model element</option>
+<option value="shape|291.0|41.0|205.0|37.0|UILabel_eVnvfAGGAqACaAgh.html|UILabel_eVnvfAGGAqACaAgh.html|eVnvfAGGAqACaAgg" id="optioneVnvfAGGAqACaAgg">Livres enregitrés : UILabel</option>
+<option value="shape|442.0|351.0|213.0|38.0|UIToggleButton_phFvfAGGAqACaAfk.html|UIToggleButton_phFvfAGGAqACaAfk.html|xhFvfAGGAqACaAfj" id="optionxhFvfAGGAqACaAfj">Quitter : Toggle Button</option>
+<option value="shape|442.0|104.0|213.0|231.0|UITextArea_VzuvfAGGAqACaAfX.html|UITextArea_VzuvfAGGAqACaAfX.html|VzuvfAGGAqACaAfW" id="optionVzuvfAGGAqACaAfW">TextArea5 : Text Area</option>
+<option value="shape|305.0|103.0|116.0|39.0|UIButton_GNzPfAGGAqACaAb4.html|UIButton_GNzPfAGGAqACaAb4.html|6NzPfAGGAqACaAb3" id="option6NzPfAGGAqACaAb3">Rechercher : UIButton</option>
+<option value="shape|269.0|350.0|152.0|39.0|UIButton_4k8PfAGGAqACaBJ6.html|UIButton_4k8PfAGGAqACaBJ6.html|4k8PfAGGAqACaBJ5" id="option4k8PfAGGAqACaBJ5">Ajouter : UIButton</option>
+<option value="shape|108.0|350.0|153.0|39.0|UIButton_XAgPfAGGAqACaBI5.html|UIButton_XAgPfAGGAqACaBI5.html|HAgPfAGGAqACaBI4" id="optionHAgPfAGGAqACaBI4">Livre enregitrés : UIButton</option>
+<option value="shape|175.0|200.0|246.0|38.0|UITextArea_Hc33fAGGAqACaBIk.html|UITextArea_Hc33fAGGAqACaBIk.html|Hc33fAGGAqACaBIj" id="optionHc33fAGGAqACaBIj">TextArea4 : Text Area</option>
+<option value="shape|175.0|149.0|246.0|38.0|UITextArea_ELz3fAGGAqACaBIO.html|UITextArea_ELz3fAGGAqACaBIO.html|4Lz3fAGGAqACaBIN" id="option4Lz3fAGGAqACaBIN">TextArea3 : Text Area</option>
+<option value="shape|175.0|104.0|124.0|38.0|UITextArea_iCN3fAGGAqACaBHv.html|UITextArea_iCN3fAGGAqACaBHv.html|kCN3fAGGAqACaBHu" id="optionkCN3fAGGAqACaBHu">TextArea2 : Text Area</option>
+<option value="shape|269.0|246.0|152.0|89.0|UITextArea_V1R3fAGGAqACaBGg.html|UITextArea_V1R3fAGGAqACaBGg.html|51R3fAGGAqACaBGf" id="option51R3fAGGAqACaBGf">TextArea : Text Area</option>
+<option value="shape|199.0|246.0|55.0|38.0|UILabel_BtS3fAGGAqACaBFW.html|UILabel_BtS3fAGGAqACaBFW.html|BtS3fAGGAqACaBFV" id="optionBtS3fAGGAqACaBFV">photo : UILabel</option>
+<option value="shape|108.0|200.0|108.0|26.0|UILabel_hCi3fAGGAqACaBFO.html|UILabel_hCi3fAGGAqACaBFO.html|hCi3fAGGAqACaBFN" id="optionhCi3fAGGAqACaBFN">auteur : UILabel</option>
+<option value="shape|108.0|154.0|108.0|26.0|UILabel_aGc3fAGGAqACaBFI.html|UILabel_aGc3fAGGAqACaBFI.html|aGc3fAGGAqACaBFH" id="optionaGc3fAGGAqACaBFH">titre : UILabel</option>
+<option value="shape|108.0|109.0|108.0|26.0|UILabel_3SE3fAGGAqACaBEk.html|UILabel_3SE3fAGGAqACaBEk.html|nSE3fAGGAqACaBEj" id="optionnSE3fAGGAqACaBEj">Code : UILabel</option>
+<option value="shape|2.0|2.0|723.0|440.0|UIFrame_25TXfAGGAqACaBDH.html|UIFrame_25TXfAGGAqACaBDH.html|25TXfAGGAqACaBDG" id="option25TXfAGGAqACaBDG">Gestion des Livres : UIFrame</option>
+</select>				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: relative; top: 24;">
+			<tr>
+				<td>
+					<img id="diagram" src="../images/IHM1.png" usemap="#diagram_map" class="Image" width="729" height="446"/>
+					<map name="diagram_map">
+<area imageId="diagram" coords="291, 41, 496, 78" coords2="291, 41, 496, 78" shape="rect" alt="Livres enregitrés:UILabel" id="areadiagram_map_eVnvfAGGAqACaAgg_default" href="UILabel_eVnvfAGGAqACaAgh.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="442, 351, 655, 389" coords2="442, 351, 655, 389" shape="rect" alt="Quitter:Toggle Button" id="areadiagram_map_xhFvfAGGAqACaAfj_default" href="UIToggleButton_phFvfAGGAqACaAfk.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="442, 104, 655, 335" coords2="442, 104, 655, 335" shape="rect" alt="TextArea5:Text Area" id="areadiagram_map_VzuvfAGGAqACaAfW_default" href="UITextArea_VzuvfAGGAqACaAfX.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="305, 103, 421, 142" coords2="305, 103, 421, 142" shape="rect" alt="Rechercher:UIButton" id="areadiagram_map_6NzPfAGGAqACaAb3_default" href="UIButton_GNzPfAGGAqACaAb4.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="269, 350, 421, 389" coords2="269, 350, 421, 389" shape="rect" alt="Ajouter:UIButton" id="areadiagram_map_4k8PfAGGAqACaBJ5_default" href="UIButton_4k8PfAGGAqACaBJ6.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="108, 350, 261, 389" coords2="108, 350, 261, 389" shape="rect" alt="Livre enregitrés:UIButton" id="areadiagram_map_HAgPfAGGAqACaBI4_default" href="UIButton_XAgPfAGGAqACaBI5.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="175, 200, 421, 238" coords2="175, 200, 421, 238" shape="rect" alt="TextArea4:Text Area" id="areadiagram_map_Hc33fAGGAqACaBIj_default" href="UITextArea_Hc33fAGGAqACaBIk.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="175, 149, 421, 187" coords2="175, 149, 421, 187" shape="rect" alt="TextArea3:Text Area" id="areadiagram_map_4Lz3fAGGAqACaBIN_default" href="UITextArea_ELz3fAGGAqACaBIO.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="175, 104, 299, 142" coords2="175, 104, 299, 142" shape="rect" alt="TextArea2:Text Area" id="areadiagram_map_kCN3fAGGAqACaBHu_default" href="UITextArea_iCN3fAGGAqACaBHv.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="269, 246, 421, 335" coords2="269, 246, 421, 335" shape="rect" alt="TextArea:Text Area" id="areadiagram_map_51R3fAGGAqACaBGf_default" href="UITextArea_V1R3fAGGAqACaBGg.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="199, 246, 254, 284" coords2="199, 246, 254, 284" shape="rect" alt="photo:UILabel" id="areadiagram_map_BtS3fAGGAqACaBFV_default" href="UILabel_BtS3fAGGAqACaBFW.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="108, 200, 216, 226" coords2="108, 200, 216, 226" shape="rect" alt="auteur:UILabel" id="areadiagram_map_hCi3fAGGAqACaBFN_default" href="UILabel_hCi3fAGGAqACaBFO.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="108, 154, 216, 180" coords2="108, 154, 216, 180" shape="rect" alt="titre:UILabel" id="areadiagram_map_aGc3fAGGAqACaBFH_default" href="UILabel_aGc3fAGGAqACaBFI.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="108, 109, 216, 135" coords2="108, 109, 216, 135" shape="rect" alt="Code:UILabel" id="areadiagram_map_nSE3fAGGAqACaBEj_default" href="UILabel_3SE3fAGGAqACaBEk.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="2, 2, 725, 442" coords2="2, 2, 725, 442" shape="rect" alt="Gestion des Livres:UIFrame" id="areadiagram_map_25TXfAGGAqACaBDG_default" href="UIFrame_25TXfAGGAqACaBDH.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+</map>
+				</td>
+			</tr>
+		</table>
+		<p>
+		</p>
+	</div>
+	<p>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0">
+			<tr>
+				<td>
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="color:#000000;margin-left:0;font-weight:normal;font-size:12px;font-family:Dialog;margin-right:0;">
+    <p style="margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;margin-top:0pt;">
+      ce interface presente la fome ext&#233;rieure de l'application et caract&#233;ris&#233; 
+      par l'ajoute d'un neauvou livre et recheche sur un livre qui deja existe 
+      dans la collection ainsi que permet de passage &#224; l'interface des livres 
+      enregistr&#233;s (IHM2)
+    </p>
+  </body></span>				</td>
+			</tr>
+		</table>
+	</p>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="Category">
+				Model Elements			</td>
+		</tr>
+		<tr>
+			<td style="height: 5px">
+			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td colSpan="4" class="TableHeaderLine">
+			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine1">
+			</td>
+		</tr>
+		<tr class="TableHeader">
+			<td class="TableCellSpaceHolder10Px">
+			</td>
+			<td width="30%">
+<span class="TableHeaderText">Name</span>			</td>
+			<td class="TableCellSpaceHolder20Px">
+			</td>
+			<td>
+<span class="TableHeaderText">Description</span>			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine2">
+			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Label.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Label.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UILabel_eVnvfAGGAqACaAgh.html" class="ItemLink">Livres enregitrés : UILabel</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/ToggleButton.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/ToggleButton.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UIToggleButton_phFvfAGGAqACaAfk.html" class="ItemLink">Quitter : Toggle Button</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/TextArea.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/TextArea.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UITextArea_VzuvfAGGAqACaAfX.html" class="ItemLink">TextArea5 : Text Area</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Button.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Button.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UIButton_GNzPfAGGAqACaAb4.html" class="ItemLink">Rechercher : UIButton</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Button.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Button.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UIButton_4k8PfAGGAqACaBJ6.html" class="ItemLink">Ajouter : UIButton</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Button.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Button.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UIButton_XAgPfAGGAqACaBI5.html" class="ItemLink">Livre enregitrés : UIButton</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/TextArea.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/TextArea.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UITextArea_Hc33fAGGAqACaBIk.html" class="ItemLink">TextArea4 : Text Area</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/TextArea.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/TextArea.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UITextArea_ELz3fAGGAqACaBIO.html" class="ItemLink">TextArea3 : Text Area</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/TextArea.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/TextArea.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UITextArea_iCN3fAGGAqACaBHv.html" class="ItemLink">TextArea2 : Text Area</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/TextArea.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/TextArea.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UITextArea_V1R3fAGGAqACaBGg.html" class="ItemLink">TextArea : Text Area</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Label.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Label.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UILabel_BtS3fAGGAqACaBFW.html" class="ItemLink">photo : UILabel</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Label.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Label.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UILabel_hCi3fAGGAqACaBFO.html" class="ItemLink">auteur : UILabel</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Label.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Label.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UILabel_aGc3fAGGAqACaBFI.html" class="ItemLink">titre : UILabel</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Label.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Label.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UILabel_3SE3fAGGAqACaBEk.html" class="ItemLink">Code : UILabel</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Frame.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Frame.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UIFrame_25TXfAGGAqACaBDH.html" class="ItemLink">Gestion des Livres : UIFrame</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="TableCellSpaceHolder1PxTall">
+			</td>
+		</tr>
+		<tr>
+			<td class="TableFooter">
+			</td>
+		</tr>
+	</table>
+	<div style="height: 20px">
+	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="FooterLine">
+			</td>
+		</tr>
+	</table>
+	<div class="HeaderText">
+		Gestion_livre	</div>
+</body>
+</html>

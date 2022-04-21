@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>livresTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Menue (1) (21 avr. 2022 01:21:22)</a> &gt; <a href="../../index.html" class="el_group">Bibliothéque</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">G_Livres</a> &gt; <span class="el_source">livresTest.java</span></div><h1>livresTest.java</h1><pre class="source lang-java linenums">package G_Livres;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+<span class="nc" id="L12">class livresTest {</span>
+@Test
+public void testlivres() {
+<span class="nc" id="L15">    livres lvr = new livres(&quot;jg123&quot;, &quot;java&quot;, &quot;james&quot;);</span>
+<span class="nc" id="L16">    assertNotEquals(null, lvr);</span>
+<span class="nc" id="L17">}</span>
+
+
+//Test of getCode method, of class livres.
+@Test
+public void testgetCode() {
+<span class="nc" id="L23">    livres lvr = new livres(&quot;jg123&quot;, &quot;java&quot;, &quot;james&quot;);</span>
+<span class="nc" id="L24">    assertEquals(&quot;jg123&quot;, lvr.getCode());</span>
+<span class="nc" id="L25">}</span>
+
+//Test of getTitre method, of class livres.
+@Test
+public void testgetTitre() {
+<span class="nc" id="L30">	 livres lvr = new livres(&quot;jg123&quot;, &quot;java&quot;, &quot;james&quot;);</span>
+<span class="nc" id="L31">	    assertEquals(&quot;java&quot;, lvr.getTitre());</span>
+<span class="nc" id="L32">}</span>
+
+//Test of getAuteur method, of class livres.
+@Test
+public void testgetAuteur() {
+<span class="nc" id="L37">	 livres lvr = new livres(&quot;jg123&quot;, &quot;java&quot;, &quot;james&quot;);</span>
+<span class="nc" id="L38">	    assertEquals(&quot;james&quot;, lvr.getAuteur());</span>
+<span class="nc" id="L39">}</span>
+}
+ 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Menue (1) (21 avr. 2022 01:21:22)</div></body></html>
